@@ -1,18 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int max_(int a, int b) {
+int max(int a, int b) {
   return a >= b ? a : b;
 }
 
-int envidont(int c1, int c2, int c3) {
-  if (c1 >= 1 && c1 <= 7 && c1 > c2 || c1 > c3)
-    return c1;
-  if (c2 >= 1 && c2 <= 7 && c2 > c1 || c2 > c3)
-    return c2;
-  if (c3 >= 1 && c3 <= 7 && c3 > c2 || c3 > c1)
-    return c3;
-}
 
 void figura(int *c1, int *c2, int *c3) {
   if (*c1 >= 10 && *c1 <= 12) *c1 = 0;
@@ -23,13 +15,19 @@ void figura(int *c1, int *c2, int *c3) {
 int envido(int c1, char p1, int c2, char p2, int c3, char p3) {
   figura(&c1,&c2,&c3);
   int res = 0;
+  int seg = 0;
+  int maxi = 0;
   if (p1 == p2) res = c1 + c2 + 20;
   else if (p2 == p3) res = c2 + c3 + 20;
   else if (p1 == p3) res = c1 + c3 + 20;
+  else if (p1 != p2 && p2 != p3) res = max(max(c1,c2),c3);
   else if (p1 == p2 && p2 == p3) {
-    res = max_(max_(c1,c2),c3);
+    maxi = max(max(c1,c2),c3);
+    if (max(c1,c2) > max(c2,c3)) seg = max(c1,c2);
+    if (max(c1,c2) < max(c2,c3)) seg = max(c2,c3);
+    res = maxi + seg + 20;
   }
-  else res = envidont(c1,c2,c3);
+
   return res;
 }
 
