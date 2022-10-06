@@ -7,27 +7,21 @@ int max(int a, int b) {
 
 
 void figura(int *c1, int *c2, int *c3) {
-  if (*c1 >= 10 && *c1 <= 12) *c1 = 0;
-  if (*c2 >= 10 && *c2 <= 12) *c2 = 0;
-  if (*c3 >= 10 && *c3 <= 12) *c3 = 0;
+  if (*c1 >= 10) *c1 = 0;
+  if (*c2 >= 10) *c2 = 0;
+  if (*c3 >= 10) *c3 = 0;
 }
 
 int envido(int c1, char p1, int c2, char p2, int c3, char p3) {
   figura(&c1,&c2,&c3);
   int res = 0;
-  int seg = 0;
-  int maxi = 0;
   if (p1 == p2) res = c1 + c2 + 20;
   else if (p2 == p3) res = c2 + c3 + 20;
   else if (p1 == p3) res = c1 + c3 + 20;
-  else if (p1 != p2 && p2 != p3) res = max(max(c1,c2),c3);
-  else if (p1 == p2 && p2 == p3) {
-    maxi = max(max(c1,c2),c3);
-    if (max(c1,c2) > max(c2,c3)) seg = max(c1,c2);
-    if (max(c1,c2) < max(c2,c3)) seg = max(c2,c3);
-    res = maxi + seg + 20;
+  if (p1 != p2 && p2 != p3) res = max(max(c1,c2),c3);
+  if (p1 == p2 && p2 == p3) {
+    res = max(c1+c3,max(c1+c2,c2+c3)) + 20;
   }
-
   return res;
 }
 
