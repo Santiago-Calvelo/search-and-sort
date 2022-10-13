@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void swap(int a[], int j, int i) {
+void swap(int a[], int i, int j) {
   int temp = a[i];
   a[i] = a[j];
   a[j] = temp;
@@ -9,7 +9,7 @@ void swap(int a[], int j, int i) {
 
 void bubble(int a[], int lenght) {
   for (int i = 0; i < lenght; i++) {
-    for (int j = i; j < lenght; j++) {
+    for (int j = 0; j < lenght-1; j++) {
       if (a[j] > a[j+1]) swap(a,j,j+1);
     }
   }
