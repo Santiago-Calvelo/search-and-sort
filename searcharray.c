@@ -2,13 +2,14 @@
 #include <stdlib.h>
 
 int binary_search_array(int a[], int k, int lo, int hi) {
-  if (hi - lo == 1 && a[lo+1] != k) return -1;
-  else if (hi - lo == 1) return lo + 1;
-  int mid = lo + (hi - lo) / 2;
-  if (a[mid] >= k)
-    return binary_search_array(a, k, lo, mid);
-  else
-    return binary_search_array(a,k,mid,hi);
+  while (hi-lo > 1) {
+    int mid = (lo+hi) / 2;
+    if (a[mid] > k)
+      hi = mid;
+    else
+      lo = mid;
+  }
+  return lo;
 }
 
 void print_arr(int a[],int n) {
